@@ -1,7 +1,6 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import axios from "../api/axiosInstance.js";
-const Signup = () => {
-  const [name, setName] = useState("");
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,22 +12,20 @@ const Signup = () => {
     axios.defaults.withCredentials = true;
     setSuccess("");
     setLoad(true);
-    if (!name.trim() || !email.trim() || !password.trim()) {
+    if (!email.trim() || !password.trim()) {
       setSuccess("All fields are required");
       setLoad(false);
       return;
     }
     try {
-      const res = await axios.post("/api/auth/register", {
-        name,
+      const res = await axios.post("/api/auth/login", {
         email,
         password,
       });
       if (!res.data.success) {
         setSuccess(res.data.message);
       } else {
-        setSuccess(res.data.message);
-        setName("");
+        setSuccess("Logged In!");
         setEmail("");
         setPassword("");
       }
@@ -40,20 +37,12 @@ const Signup = () => {
   return (
     <div className="rounded-lg max-w-[400px] w-full bg-black">
       <h2 className="text-3xl text-center font-semibold text-white mt-10 mb-8">
-        Signup
+        Login
       </h2>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center gap-5 w-full px-6"
       >
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="p-3 rounded-lg bg-gradient-to-b from-slate-700 to-slate-950 text-white border-b border-green-800"
-        />
-        {/* {nameErr && <p className="text-red-500 text-sm">{nameErr}</p>} */}
         <input
           type="email"
           placeholder="Email"
@@ -79,12 +68,12 @@ const Signup = () => {
             className="bg-slate-800 py-3 w-full rounded-full text-white uppercase
                     font-semibold border-b border-green-900 hover:opacity-95"
           >
-            {load ? "Signing Up..." : "signup"}
+            {load ? "Signing In..." : "login"}
           </button>
         </div>
-        <p className={`mb-8 text-green-500 text-sm ${success.includes("Account") ? 'text-green-500': "text-red-500"}`}>{success}</p>
+        <p className={`mb-8 text-green-500 text-sm ${success.includes("Logged") ? 'text-green-500': "text-red-500"}`}>{success}</p>
       </form>
     </div>
   );
 };
-export default Signup;
+export default Login;
