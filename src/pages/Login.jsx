@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "../api/axiosInstance.js";
+import { useNavigate } from "react-router-dom";
+import { userAuth } from "../context/AuthContext.jsx";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -7,6 +9,8 @@ const Login = () => {
   const [load, setLoad] = useState(false);
   const [success, setSuccess] = useState("");
 
+  const {setUser} = userAuth();
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios.defaults.withCredentials = true;
@@ -26,8 +30,10 @@ const Login = () => {
         setSuccess(res.data.message);
       } else {
         setSuccess("Logged In!");
+        setUser(res.data.userData);
         setEmail("");
         setPassword("");
+        navigate("/");
       }
     } catch (error) {
       console.log("An error occured! ", error.message);
