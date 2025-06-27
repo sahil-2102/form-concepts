@@ -1,11 +1,15 @@
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
-import {Routes, Route} from 'react-router-dom'
+import Navbar from "./components/Navbar"
+import {Router,Routes, Route} from 'react-router-dom'
+import Dashboard from "./pages/Dashboard"
 const App = () => {
   return (
-    <div className="h-screen bg-gradient-to-r from-gray-700 to-gray-400 flex items-center justify-center">
-      <Routes>
-        <Route path="/" element={<Signup/>}/>
+    <div>
+        <Navbar/>
+        <Routes>
+        <Route path="/" element={<Dashboard/>}/>
+        <Route path="/register" element={<Signup/>}/>
         <Route path="/login" element={<Login/>}/>
       </Routes>
     </div>

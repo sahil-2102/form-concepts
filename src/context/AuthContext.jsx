@@ -5,6 +5,8 @@ export const AuthProvider = ({children}) => {
     axios.defaults.withCredentials = true;
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+
+
     useEffect(() => {
         const checkAuth = async () => {
             try {
@@ -26,6 +28,8 @@ export const AuthProvider = ({children}) => {
         await axios.post('/api/auth/logout');
         setUser(null);
     };
+
+    
     return (
         <AuthContext.Provider value={{user, loading, setUser, logout}}>
             {children}
