@@ -38,7 +38,8 @@ const Signup = () => {
     setLoad(false);
   };
   return (
-    <div className="rounded-lg max-w-[400px] w-full bg-black">
+    <div className="h-screen bg-gradient-to-r from-gray-700 to-gray-400 flex items-center justify-center">
+      <div className="rounded-lg max-w-[400px] w-full bg-black">
       <h2 className="text-3xl text-center font-semibold text-white mt-10 mb-8">
         Signup
       </h2>
@@ -85,6 +86,8 @@ const Signup = () => {
         <p className={`mb-8 text-green-500 text-sm ${success.includes("Account") ? 'text-green-500': "text-red-500"}`}>{success}</p>
       </form>
     </div>
+    </div>
+    
   );
 };
 export default Signup;
