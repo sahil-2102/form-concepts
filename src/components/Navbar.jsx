@@ -13,7 +13,7 @@ const Navbar = () => {
           </h2>
           <div className="text-white text-xl
             bg-black py-1 px-3 rounded-full hover:text-black hover:bg-white transition-all
-          "
+          hover:cursor-pointer"
 
           >
             {user ? (
